@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 class TodoItem extends React.Component {
     constructor(props) {
@@ -13,13 +15,11 @@ class TodoItem extends React.Component {
             method: "PATCH",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
-                done: !this.state.done
+                done: !this.props.todoData.done
             })
         })
         .then(() => {
-            this.setState({
-                done: !this.state.done
-            })
+            this.props.handleSuccessfulDone(this.props.todoData.id)
         })
         .catch(err => {
             console.log("toggleDone Error: ", err)
@@ -29,15 +29,20 @@ class TodoItem extends React.Component {
     render() {
         return (
             <div className="todo-item">
-                <input
-                    type="checkbox"
-                    defaultChecked={this.state.done}
-                    onClick={this.toggleDone}
-                />
-                <p className={this.state.done ? "done" : null}>
-                    {this.props.todoData.title}
-                </p>
-                <button onClick={() => this.props.deleteTodo(this.props.todoData.id)}>X</button>
+                <div className="todo-item-left">
+                    <input
+                        type="checkbox"
+                        defaultChecked={this.state.done}
+                        onClick={this.toggleDone}
+                        className="checkbox"
+                    />
+                    <p className={this.props.todoData.done ? "done" : null}>
+                        {this.props.todoData.title}
+                    </p>
+                </div>
+                <div onClick={() => this.props.deleteTodo(this.props.todoData.id)} className="delete-btn">
+                    <FontAwesomeIcon icon={faTrash} />
+                </div>
             </div>
         )
     }

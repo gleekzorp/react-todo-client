@@ -20,6 +20,18 @@ class App extends React.Component {
     })
   }
 
+  handleSuccessfulDone = (id) => {
+    let todos = this.state.todos
+    todos.forEach(todo => {
+      if (todo.id === id) {
+        todo.done = !todo.done
+      }
+    })
+    this.setState({
+      todos: todos
+    })
+  }
+
   addTodo = (e) => {
     e.preventDefault()
     axios({
@@ -58,6 +70,28 @@ class App extends React.Component {
     })
   }
 
+  deleteFinishedTodos = () => {
+    let finished_todos = this.state.todos.filter(todo => {
+      return todo.done === true
+    })
+    axios.all(finished_todos.map((finished_todo) => {
+      axios({
+        url: `http://localhost:5000/todo/${finished_todo.id}`,
+        method: "delete"
+      })
+      .then(() => {
+        this.setState((prevState) => ({
+          todos: prevState.todos.filter(todo => {
+            return todo.id !== finished_todo.id
+          })
+        }))
+      })
+      .catch((err) => {
+        console.log('deleteFinishedTodos Error', err)
+      })
+    }))
+  }
+
   componentDidMount() {
     fetch("http://localhost:5000/todos")
       .then(res => res.json())
@@ -74,7 +108,14 @@ class App extends React.Component {
 
   renderTodos = () => {
     return this.state.todos.map(todo => {
-      return <TodoItem key={todo.id} todoData={todo} deleteTodo={this.deleteTodo}/>
+      return (
+        <TodoItem
+          key={todo.id}
+          todoData={todo}
+          deleteTodo={this.deleteTodo}
+          handleSuccessfulDone={this.handleSuccessfulDone}
+        />
+      )
     })
   }
 
@@ -92,6 +133,9 @@ class App extends React.Component {
           <button type="submit">Add</button>
         </form>
         {this.renderTodos()}
+        {this.state.todos.length > 1 ? (
+          <button className="delete-all-btn" onClick={this.deleteFinishedTodos}>Delete Finished Todos</button>
+        ) : null}
       </div>
     )
   }
