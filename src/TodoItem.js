@@ -37,6 +37,7 @@ class TodoItem extends React.Component {
                 <p className={this.state.done ? "done" : null}>
                     {this.props.todoData.title}
                 </p>
+                <button onClick={() => this.props.deleteTodo(this.props.todoData.id)}>X</button>
             </div>
         )
     }
