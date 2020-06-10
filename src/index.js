@@ -32,7 +32,10 @@ class App extends React.Component {
       }
     })
     .then(res => {
-      console.log(res)
+      this.setState({
+        todos: [...this.state.todos, res.data],
+        todo: ""
+      })
     })
     .catch(err => {
       console.log("addTodo Error: ", err)
