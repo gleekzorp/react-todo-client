@@ -100,7 +100,6 @@ class App extends React.Component {
     fetch("https://df-flask-todo-api-class.herokuapp.com/todos")
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         this.setState({
           todos: data
         })
