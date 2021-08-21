@@ -23,24 +23,25 @@
   margin-bottom: 60px;
 }
 
-.add-todo input, button {
+.add-todo input,
+button {
   border-radius: 10px;
   outline: none;
   border: none;
 }
 
 .add-todo > input {
-    padding: .5em;
+  padding: 0.5em;
 }
 
 .add-todo > button {
-    padding: .6em 2em;
-    cursor: pointer;
+  padding: 0.6em 2em;
+  cursor: pointer;
 }
 
 .add-todo > button:hover {
-    background: #00cb78;
-    color: white;
+  background: #00cb78;
+  color: white;
 }
 
 .todo-item {
@@ -56,37 +57,37 @@
 }
 
 .delete-btn {
-    color: #D00000;
-    cursor: pointer;
+  color: #d00000;
+  cursor: pointer;
 }
 
 .delete-btn:hover {
-    color: #FF0000;
+  color: #ff0000;
 }
 
 .delete-all-btn {
-    margin: 2em 0;
-    padding: 1em;
-    background: #D00000;
-    color: white;
-    font-weight: 900;
-    text-transform: uppercase;
-    cursor: pointer;
+  margin: 2em 0;
+  padding: 1em;
+  background: #d00000;
+  color: white;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .delete-all-btn:hover {
-    background: #FF0000;
+  background: #ff0000;
 }
 
 .todo-item-left {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .todo-item-left > p {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 
 .checkbox {
-    cursor: pointer;
+  cursor: pointer;
 }
